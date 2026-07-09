@@ -7,8 +7,8 @@ import { useState } from "react";
 
 const NAVBAR_CONSTANT = [
   { title: "Reserve Table", value: "tables" },
-  { title: "Find Place", value: "places" },
   { title: "Products", value: "products" },
+  { title: "Partner With Us", value: "join-us" },
   { title: "Docs", value: "docs" },
 ];
 
@@ -28,9 +28,9 @@ export default function Navbar() {
 
   return (
     <div className="flex justify-between mt-4">
-      <div className="flex gap-8">
-        <div>Logo</div>
-        <div className="flex gap-4">
+      <div className="flex gap-8 my-auto">
+        <h1 className="text-2xl">Plokas.</h1>
+        <div className="flex gap-6 my-auto">
           {NAVBAR_CONSTANT.map((nav) => {
             return (
               <Link href={nav.value} key={nav.value}>
@@ -42,7 +42,11 @@ export default function Navbar() {
       </div>
       <div className="flex items-center gap-2">
         <Button variant="ghost">Log in</Button>
-        <Button onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <Button
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className="bg-primary-foreground text-primary hover:bg-primary-foreground/70"
+        >
           Sign Up
           <DotLottieReact
             src="/rightChevron.lottie"
@@ -54,6 +58,7 @@ export default function Navbar() {
             className="size-6"
           />
         </Button>
+        <Button variant="link">EN</Button>
       </div>
     </div>
   );
