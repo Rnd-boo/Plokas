@@ -65,11 +65,7 @@ export default function Navbar() {
       </div>
       <div className="hidden md:flex items-center gap-2">
         <Button variant="ghost">Log in</Button>
-        <Button
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          className="bg-primary-foreground text-primary hover:bg-primary-foreground/70"
-        >
+        <Button onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           Sign Up
           <DotLottieReact
             src="/rightChevron.lottie"
