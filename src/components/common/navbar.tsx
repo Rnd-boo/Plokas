@@ -110,7 +110,9 @@ export default function Navbar() {
                 );
               })}
               <Separator />
-              <Button variant="outline">Log in</Button>
+              <Link href="/login">
+                <Button variant="outline">Log in</Button>
+              </Link>
               <Button className="bg-primary-foreground text-primary hover:bg-primary-foreground/70">
                 Sign Up
               </Button>
