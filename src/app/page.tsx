@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <div className="mx-4 md:mx-8 h-2000">
       <Navbar />
-      <main>
+      <main className="rounded-3xl bg-linear-to-br from-indigo-500 via-indigo-800 to-black px-6 py-8 md:px-10 md:py-12">
         <div className="flex flex-col md:flex-row md:items-center gap-8 w-full mt-12 xl:my-20 2xl:my-36">
           <div className="w-full md:max-w-4xl">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl mb-4">

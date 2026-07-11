@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
@@ -13,7 +13,14 @@ import {
 } from "../ui/drawer";
 import { Separator } from "../ui/separator";
 import { useAuthStore } from "@/store/auth-store";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 import { signOut } from "@/actions/auth-action";
 
 const NAVBAR_CONSTANT = [
@@ -23,7 +30,7 @@ const NAVBAR_CONSTANT = [
   { title: "Docs", value: "docs" },
 ];
 
-export default  function Navbar() {
+export default function Navbar() {
   const [dotLottie, setDotLottie] = useState<{
     play: () => void;
     stop: () => void;
@@ -50,9 +57,9 @@ export default  function Navbar() {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  const profile = useAuthStore((state) => state.profile)
+  const profile = useAuthStore((state) => state.profile);
   return (
-    <div className="flex justify-between mt-4">
+    <div className="flex justify-between my-3">
       <div className="flex gap-8 my-auto">
         <h1 className="text-2xl">Plokas.</h1>
         <div className="hidden md:flex gap-6 my-auto">
@@ -66,39 +73,46 @@ export default  function Navbar() {
         </div>
       </div>
       <div className="hidden md:flex items-center gap-2">
-       {profile.name ? (
-         <DropdownMenu>
-  <DropdownMenuTrigger render={<Button variant="outline" />}>
-    <UserRound />
-  </DropdownMenuTrigger>
-  <DropdownMenuContent>
-    <DropdownMenuGroup>
-      <DropdownMenuItem>{profile.name}</DropdownMenuItem>
-    </DropdownMenuGroup>
-    <DropdownMenuSeparator />
-    <DropdownMenuGroup>
-      <DropdownMenuItem variant="destructive"  onClick={() => signOut()}>Logout</DropdownMenuItem>
-    </DropdownMenuGroup>
-  </DropdownMenuContent>
-</DropdownMenu>
-       ) : (
-         <>
-           <Link href="/login">
-             <Button variant="ghost">Log in</Button>
-           </Link>
-           <Button onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-          Sign Up
-          <DotLottieReact
-            src="/rightChevron.lottie"
-            dotLottieRefCallback={(instance) => {
-              setDotLottie(instance);
-            }}
-            themeData="#6366F1"
-            color="#6366F1"
-            className="size-6"
-          />
-        </Button></>
-       )}
+        {profile.name ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger render={<Button variant="outline" />}>
+              <UserRound />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuGroup>
+                <DropdownMenuItem>{profile.name}</DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem
+                  variant="destructive"
+                  onClick={() => signOut()}
+                >
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <>
+            <Link href="/login">
+              <Button variant="ghost">Log in</Button>
+            </Link>
+            <Button
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              Sign Up
+              <DotLottieReact
+                src="/White.lottie"
+                dotLottieRefCallback={(instance) => {
+                  setDotLottie(instance);
+                }}
+                className="size-4"
+              />
+            </Button>
+          </>
+        )}
         <Button variant="link">EN</Button>
       </div>
       <div className="md:hidden">
