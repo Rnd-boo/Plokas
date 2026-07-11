@@ -16,10 +16,11 @@ import {
   INITIAL_STATE_LOGIN_FORM,
 } from "@/constant/auth.constant";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { startTransition, useActionState } from "react";
+import { startTransition, useActionState, useEffect } from "react";
 import FormInput from "@/components/common/form-input";
 import { Loader2 } from "lucide-react";
 import { login } from "../action";
+import { toast } from "sonner";
 
 export function Login() {
   const form = useForm<LoginForm>({
@@ -42,6 +43,17 @@ export function Login() {
       loginAction(formData);
     });
   });
+
+    useEffect(() => {
+    if (loginState?.status === "error") {
+      toast.error("Login Failed", {
+        description: loginState.errors?._form?.[0],
+      });
+      startTransition(() => {
+        loginAction(null);
+      });
+    }
+  }, [loginState]);
 
   return (
     <div className="flex flex-col gap-6">

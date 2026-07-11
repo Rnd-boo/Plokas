@@ -13,6 +13,7 @@ import {
   DrawerTitle,
 } from "../ui/drawer";
 import { Separator } from "../ui/separator";
+import { useAuthStore } from "@/store/auth-store";
 
 const NAVBAR_CONSTANT = [
   { title: "Reserve Table", value: "tables" },
@@ -48,7 +49,8 @@ export default function Navbar() {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
+  const profile = useAuthStore((state) => state.profile)
+  console.log(profile)
   return (
     <div className="flex justify-between mt-4">
       <div className="flex gap-8 my-auto">
@@ -64,8 +66,14 @@ export default function Navbar() {
         </div>
       </div>
       <div className="hidden md:flex items-center gap-2">
-        <Button variant="ghost">Log in</Button>
-        <Button onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+       {profile?.name ? (
+         <span>Welcome, {profile.name}!</span>
+       ) : (
+         <>
+           <Link href="/login">
+             <Button variant="ghost">Log in</Button>
+           </Link>
+           <Button onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           Sign Up
           <DotLottieReact
             src="/rightChevron.lottie"
@@ -76,7 +84,8 @@ export default function Navbar() {
             color="#6366F1"
             className="size-6"
           />
-        </Button>
+        </Button></>
+       )}
         <Button variant="link">EN</Button>
       </div>
       <div className="md:hidden">
