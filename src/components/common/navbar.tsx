@@ -1,10 +1,9 @@
-"use client";
-
+'use client'
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, UserRound, X } from "lucide-react";
 import {
   Drawer,
   DrawerContent,
@@ -14,6 +13,8 @@ import {
 } from "../ui/drawer";
 import { Separator } from "../ui/separator";
 import { useAuthStore } from "@/store/auth-store";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { signOut } from "@/actions/auth-action";
 
 const NAVBAR_CONSTANT = [
   { title: "Reserve Table", value: "tables" },
@@ -22,7 +23,7 @@ const NAVBAR_CONSTANT = [
   { title: "Docs", value: "docs" },
 ];
 
-export default function Navbar() {
+export default  function Navbar() {
   const [dotLottie, setDotLottie] = useState<{
     play: () => void;
     stop: () => void;
@@ -50,7 +51,6 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   const profile = useAuthStore((state) => state.profile)
-  console.log(profile)
   return (
     <div className="flex justify-between mt-4">
       <div className="flex gap-8 my-auto">
@@ -66,8 +66,21 @@ export default function Navbar() {
         </div>
       </div>
       <div className="hidden md:flex items-center gap-2">
-       {profile?.name ? (
-         <span>Welcome, {profile.name}!</span>
+       {profile.name ? (
+         <DropdownMenu>
+  <DropdownMenuTrigger render={<Button variant="outline" />}>
+    <UserRound />
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuGroup>
+      <DropdownMenuItem>{profile.name}</DropdownMenuItem>
+    </DropdownMenuGroup>
+    <DropdownMenuSeparator />
+    <DropdownMenuGroup>
+      <DropdownMenuItem variant="destructive"  onClick={() => signOut()}>Logout</DropdownMenuItem>
+    </DropdownMenuGroup>
+  </DropdownMenuContent>
+</DropdownMenu>
        ) : (
          <>
            <Link href="/login">
